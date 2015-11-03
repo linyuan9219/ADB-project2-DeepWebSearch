@@ -16,10 +16,11 @@ public class Main {
 		File f = new File(file_name);
 		if (f.exists()) {  
             try {  
-                BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));  
-                while ((tmpStr = reader.readLine()) != null) {  
-                    res.add(tmpStr);  
-                }  
+				BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(f)));  
+                while ((tmpStr = reader.readLine()) != null)
+                    res.add(tmpStr);
+                
+                reader.close();
             } catch (Exception e) {  
                 e.printStackTrace();  
                 return null;
@@ -41,7 +42,10 @@ public class Main {
 		//System.out.println(t);
 		
 		String account_key = "oJ3gTr9BZ/XtsMgrJvtrvUUVbbg4cidHkkfDu8JccFE";
-		BingQuery.Query("fifa.com", "soccer", account_key);
+		BingManager.SetAccountKey(account_key);
+		String res = DeepSearchManager.classifySite("fifa.com", t.root, 0.6, 100);
+		
+		System.out.println(res);
 	}
 
 }
